@@ -6,24 +6,6 @@ module.exports = (app) => {
 
     async function getUnpaidJobs(profileId) {
         //Find contract for profile
-        // const jobs = await Job.findAll({
-        //     include:[
-        //         {
-        //             model: Contract,
-        //             as: 'ContJob',
-        //             attributes: ['ContractorId', 'ClientId'],
-        //             where: {
-        //                 [Op.or]: [
-        //                     { ContractorId: profileId },
-        //                     { ClientId: profileId }
-        //                 ]
-        //             }
-        //         }
-        //     ],
-        //     where: {
-        //         paid: null
-        //     }
-        // })
         const jobs = await Contract.findAll({
             include:[
                 {
@@ -48,17 +30,6 @@ module.exports = (app) => {
 
     async function getJobDetails(jobId){
         //Get job details by Id
-        // const job = await Job.findOne({
-        //     include:[
-        //         {
-        //             model: Contract,
-        //             attributes: ['contractorId', 'clientId'],
-        //         }
-        //     ],
-        //     where: {
-        //         id: jobId
-        //     }
-        // })
         const job = await Contract.findOne({
             attributes: ['contractorId', 'clientId'],
             include:[
@@ -77,19 +48,6 @@ module.exports = (app) => {
 
     async function getClientBalance(clientId){
         //Get Balance For Client
-        // const balance = await Job.sum('price',{
-        //     include:[
-        //         {
-        //             model: Contract,
-        //             where: {
-        //                 clientId: clientId
-        //             }
-        //         }
-        //     ],
-        //     where: {
-        //         paid: null
-        //     }
-        // })
         const balance = await Contract.sum('price',{
             include:[
                 {
@@ -104,6 +62,7 @@ module.exports = (app) => {
                 clientId: clientId
             }
         })
+        
         return balance
     }
 

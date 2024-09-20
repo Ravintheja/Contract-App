@@ -96,3 +96,22 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, zip your repo (make sure to include .git folder) and send us the zip.
 
 Thank you and good luck! 🙏
+
+<<================================================================>>
+
+## NOTES By Ravin Hettiarachchi (Assessment Participant)
+
+1. For this assessment, I have used the clean code architecture. Therefore, I have separated the code segments across the
+   Controller, Usecase (business logic) and Repository (databse) files. I have also used a custom route file.
+2. Additionally, I have also created unit tests (using jest) for this application available in the test/test.js file.
+   You may run by executing the command **_npm test_**
+3. I have also included the set of API requests in the .zip file.
+4. Due to time constraints I was unable to implement a login mechanism for this application as an additional feature.
+   I would suggest utilizing a module such Winston to achieve this. I have added many console outputs which displays key variables
+   which could be helpful when testing.
+5. As for additional enhancements:
+   i. We can implement environment files to manage environment variable.
+   ii. Do further implementations for error handling.
+   iii. Add input validations and sanitation (using Joi/Express-Validator)
+
+<<================================================================>>

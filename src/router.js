@@ -11,7 +11,6 @@ module.exports = (app) => {
     const jobController = JobController(app)
     const profileController = ProfileController(app)
 
-    //Broken API
     app.get('/contracts/:id', getProfile, contractController.getContract)
     app.get('/contracts', getProfile, contractController.getAllContracts)
     app.get('/jobs/unpaid', getProfile, jobController.getUnpaidJobs)

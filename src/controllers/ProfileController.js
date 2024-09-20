@@ -19,6 +19,7 @@ module.exports = (app) => {
         const clientId = req.headers['profile_id']
         const amount = req.query.amount
 
+        //Calling Profile Usecase
         const deposit = await profileUsecase.depositForClient(clientId, amount)
 
         if(!deposit){
@@ -50,6 +51,7 @@ module.exports = (app) => {
         const startDate = req.query.start
         const endDate = req.query.end
 
+        //Calling Profile Usecase
         const profession = await profileUsecase.getBestProfession(startDate, endDate)
 
         if(!profession){
@@ -78,7 +80,7 @@ module.exports = (app) => {
         const endDate = req.query.end
         const limit = req.query.limit ? req.query.limit : 2
         
-        console.log(limit)
+        //Calling Profile Usecase
         const client = await profileUsecase.getBestClient(startDate, endDate, limit)
 
         if(!client){

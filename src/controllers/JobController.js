@@ -11,7 +11,7 @@ module.exports = (app) => {
         
         const profileId = req.headers['profile_id']
         
-        //Callinf Job Usecase
+        //Calling Job Usecase
         const unpaidJobs = await jobUsecase.getUnpaidJobs(profileId)
 
         //If records are not found
@@ -38,6 +38,7 @@ module.exports = (app) => {
         const {job_id} = req.params
         const profileId = req.headers['profile_id']
 
+        // Calling Job Usecase
         const payForJob = await jobUsecase.payForJob(job_id, profileId)
 
         if(!payForJob){

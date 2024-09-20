@@ -67,7 +67,7 @@ module.exports = (app) => {
     }
 
     async function getBestClient(startDate, endDate, limit){
-        
+        // Get Best Performing Client For Date Range
         const Client = await sequelize.query(
             `SELECT Profile.id, concat(Profile.firstName, ' ', Profile.lastName) AS fullName,
             SUM(Contjob.price) AS Amount
@@ -83,6 +83,7 @@ module.exports = (app) => {
                 type: Sequelize.QueryTypes.SELECT
             }
         )
+        // Unresolved issue in this sequalized query
         // const Client = await Profile.findAll({
         //     attributes: [
         //       'id',
@@ -116,7 +117,7 @@ module.exports = (app) => {
         //     order: [[Sequelize.literal('Amount'), 'DESC']],
         //     limit: limit,
         //   });
-          console.log(Client)
+
         return Client
     }
 
