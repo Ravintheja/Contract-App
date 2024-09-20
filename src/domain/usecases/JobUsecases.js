@@ -13,7 +13,7 @@ module.exports = (app) => {
 
         return jobs
     }
-    async function payForJob(jobId){
+    async function payForJob(jobId, profileId){
         
         //Get Job Details
         const job = await jobRepository.getJobDetails(jobId)
@@ -23,6 +23,12 @@ module.exports = (app) => {
         const clientId = job.dataValues.clientId
         const contractorId = job.dataValues.contractorId
         console.log(`Logger: Price - ${price}, ClientId - ${clientId} ContractorId - ${contractorId}`)
+
+        //Verify if profile_id matches client_id in job
+        if(profileId != clientId){
+            console.log('Logger: Profile Mismatch')
+            return false
+        }
 
         //Get Client Profile Details
         const clinetProfile = await profileRepository.getProfileDetails(clientId)

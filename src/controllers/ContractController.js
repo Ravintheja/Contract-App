@@ -8,14 +8,14 @@ module.exports = (app) => {
         console.log('<==== Single Contract ====>')
 
         //Rejecting requests without a userId
-        if(!req.query.profileId || !req.params.id) return res.status(400).json({
+        if(!req.params.id) return res.status(400).json({
             status: 'Not Found',
             message: 'No Contract or Client ID Present',
             statusCode: 400
         }).end()
 
         const {id} = req.params
-        const profileId = req.query.profileId
+        const profileId = req.headers['profile_id']
 
         //Calling Contract Usecase
         const contract = await contractUsecase.getContract(id, profileId)
@@ -33,14 +33,7 @@ module.exports = (app) => {
     async function getAllContracts(req, res){
         console.log('<==== All Contracts ====>')
 
-        //Rejecting requests without a userId
-        if(!req.query.profileId) return res.status(400).json({
-            status: 'Not Found',
-            message: 'No Contract or Client ID Present',
-            statusCode: 400
-        }).end()
-
-        const profileId = req.query.profileId
+        const profileId = req.headers['profile_id']
         
         //Calling Contract Usecase
         const contracts = await contractUsecase.getAllContracts(profileId)

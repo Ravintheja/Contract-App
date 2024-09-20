@@ -16,10 +16,10 @@ module.exports = (app) => {
             statusCode: 400
         }).end()
 
-        const {userId} = req.params
+        const clientId = req.headers['profile_id']
         const amount = req.query.amount
 
-        const deposit = await profileUsecase.depositForClient(userId, amount)
+        const deposit = await profileUsecase.depositForClient(clientId, amount)
 
         if(!deposit){
             return res.status(400).json({

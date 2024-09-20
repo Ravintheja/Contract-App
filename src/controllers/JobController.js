@@ -8,16 +8,8 @@ module.exports = (app) => {
 
     async function getUnpaidJobs(req, res){
         console.log('<==== Unpaid Jobs ====>')
-
-        //Rejecting requests without a userId
-        if(!req.query.profileId) return res.status(400).json({
-            status: 'Not Found',
-            message: 'No Contract or Client ID Present',
-            statusCode: 400
-        }).end()
-
         
-        const profileId = req.query.profileId
+        const profileId = req.headers['profile_id']
         
         //Callinf Job Usecase
         const unpaidJobs = await jobUsecase.getUnpaidJobs(profileId)
@@ -44,13 +36,14 @@ module.exports = (app) => {
         }).end()
 
         const {job_id} = req.params
+        const profileId = req.headers['profile_id']
 
-        const payForJob = await jobUsecase.payForJob(job_id)
+        const payForJob = await jobUsecase.payForJob(job_id, profileId)
 
         if(!payForJob){
             return res.status(400).json({
             status: 'Bad Request',
-            message: 'Client Balance Insufficient',
+            message: 'Client Balance Insufficient or Incorrect Profile',
             statusCode: 400
         }).end()
         }
